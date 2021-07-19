@@ -16,6 +16,9 @@ impl Vec3 {
     pub fn new(x: f64, y: f64, z: f64) -> Self {
         Self { x, y, z }
     }
+    pub fn new0() -> Self {
+        Self { x:0.0, y:0.0, z:0.0 }
+    }
 
     pub fn ones() -> Self {
         Self::new(1.0, 1.0, 1.0)

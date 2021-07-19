@@ -28,7 +28,7 @@ impl Lambertian {
 impl Material for Lambertian {
     fn scatter(
         &self,
-        ray_in: Ray,
+        _ray_in: Ray,
         rec: &HitRecord,
         attenuation: &mut Vec3,
         scattered: &mut Ray,
@@ -114,8 +114,8 @@ impl Material for Dielectric {
         let cos_theta = Vec3::fmin(-unit_direction * rec.normal, 1.0);
         let sin_theta = (1.0 - cos_theta * cos_theta).sqrt();
         let cannot_refract = refraction_ratio * sin_theta > 1.0;
-        let mut direction = Vec3::zero();
-
+        let mut direction = Vec3::new0();
+        let _x = direction;
         if cannot_refract || Dielectric::reflectance(cos_theta, refraction_ratio) > random_double1()
         {
             direction = Vec3::reflect(unit_direction, rec.normal);

@@ -67,21 +67,20 @@ fn random_scene() -> HittableList {
             );
 
             if (center - point3::new(4.0, 0.2, 0.0)).length() > 0.9 {
-                let mut sphere_material: Arc<dyn Material> =
-                    Arc::new(Metal::new(color::zero(), 0.0));
+
 
                 if choose_mat < 0.8 {
                     let albedo = Vec3::elemul(color::random1(), color::random1());
-                    sphere_material = Arc::new(Lambertian::new(albedo));
+                    let sphere_material = Arc::new(Lambertian::new(albedo));
                     world.add(Rc::new(Sphere::new(center, 0.2, sphere_material.clone())));
                 } else if choose_mat < 0.95 {
                     let albedo = color::random2(0.5, 1.0);
                     let fuzz = random_double2(0.0, 0.5);
-                    sphere_material = Arc::new(Metal::new(albedo, fuzz));
+                    let sphere_material = Arc::new(Metal::new(albedo, fuzz));
                     world.add(Rc::new(Sphere::new(center, 0.2, sphere_material.clone())));
                 } else {
                     //glass
-                    sphere_material = Arc::new(Dielectric::new(1.5));
+                    let sphere_material = Arc::new(Dielectric::new(1.5));
                     world.add(Rc::new(Sphere::new(center, 0.2, sphere_material.clone())));
                 }
             }
@@ -148,7 +147,7 @@ fn main() {
         for i in 0..image_width {
             let mut pixel_color = color::zero();
             let pixel = img.get_pixel_mut(i, j);
-            for s in 0..samples_per_pixel {
+            for _s in 0..samples_per_pixel {
                 let _i: f64 = i as f64;
                 let _j: f64 = (image_height - 1 - j) as f64;
                 let _i: f64 = (_i + random_double1()) as f64;
