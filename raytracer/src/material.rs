@@ -21,7 +21,7 @@ pub struct Lambertian {
 }
 impl Lambertian {
     pub fn new(a: color) -> Self {
-        return Self { albedo: a };
+        Self { albedo: a }
     }
 }
 
@@ -39,7 +39,7 @@ impl Material for Lambertian {
         }
         *scattered = Ray::new(rec.p, scatter_direction);
         *attenuation = self.albedo;
-        return true;
+        true
     }
 }
 
@@ -55,13 +55,13 @@ impl Metal {
         } else {
             x = 1.0;
         }
-        return Self { albedo: a, fuss: x };
+        Self { albedo: a, fuss: x }
     }
     pub fn new1(a: color) -> Self {
-        return Self {
+        Self {
             albedo: a,
             fuss: 1.0,
-        };
+        }
     }
 }
 impl Material for Metal {
@@ -84,7 +84,7 @@ pub struct Dielectric {
 }
 impl Dielectric {
     pub fn new(x: f64) -> Self {
-        return Self { ir: x };
+         Self { ir: x }
     }
 
     pub fn reflectance(cosine: f64, ref_idx: f64) -> f64 {

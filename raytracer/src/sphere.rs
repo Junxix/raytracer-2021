@@ -14,11 +14,11 @@ pub struct Sphere {
 
 impl Sphere {
     pub fn new(cen: point3, rad: f64, mp: Arc<dyn Material>) -> Self {
-        return Self {
+        Self {
             center: cen,
             radius: rad,
             mat_ptr: mp,
-        };
+        }
     }
 
     pub fn center(&self) -> Vec3 {
@@ -57,6 +57,6 @@ impl Hittable for Sphere {
                 return true;
             }
         }
-        return false;
+        false
     }
 }

@@ -52,7 +52,7 @@ fn random_scene() -> HittableList {
     world.add(Rc::new(Sphere::new(
         point3::new(0.0, -1000.0, 0.0),
         1000.0,
-        ground_material.clone(),
+        ground_material,
     )));
 
     for a in -11..11 {
@@ -89,21 +89,21 @@ fn random_scene() -> HittableList {
     world.add(Rc::new(Sphere::new(
         point3::new(0.0, 1.0, 0.0),
         1.0,
-        material1.clone(),
+        material1,
     )));
 
     let material2 = Arc::new(Lambertian::new(color::new(0.4, 0.2, 0.1)));
     world.add(Rc::new(Sphere::new(
         point3::new(-4.0, 1.0, 0.0),
         1.0,
-        material2.clone(),
+        material2,
     )));
 
     let material3 = Arc::new(Metal::new(color::new(0.7, 0.6, 0.5), 0.0));
     world.add(Rc::new(Sphere::new(
         point3::new(4.0, 1.0, 0.0),
         1.0,
-        material3.clone(),
+        material3,
     )));
 
     world

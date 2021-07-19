@@ -14,24 +14,24 @@ impl Ray {
         }
     }
     pub fn new0() -> Self {
-        return Self {
+        Self {
             orig: Vec3::zero(),
             dir: Vec3::zero(),
-        };
+        }
     }
     pub fn new(o: Vec3, d: Vec3) -> Self {
-        return Self { orig: o, dir: d };
+        Self { orig: o, dir: d }
     }
 
     pub fn orign(&self) -> Vec3 {
-        return self.orig;
+        self.orig
     }
 
     pub fn direction(&self) -> Vec3 {
-        return self.dir;
+        self.dir
     }
 
     pub fn at(&self, t: f64) -> Vec3 {
-        return self.orig + self.dir * t;
+       self.orig + self.dir * t
     }
 }

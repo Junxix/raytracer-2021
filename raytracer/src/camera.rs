@@ -36,7 +36,7 @@ impl Camera {
         let origin2 = lookfrom;
         let horizontal2 = uu * viewport_width * focus_dist;
         let vertical2 = vv * viewport_height * focus_dist;
-        return Self {
+        Self {
             origin: lookfrom,
             horizontal: horizontal2,
             vertical: vertical2,
@@ -45,7 +45,7 @@ impl Camera {
             v: vv,
             w: ww,
             lens_radius: aperture / 2.0,
-        };
+        }
     }
 
     pub fn get_ray(&self, s: f64, t: f64) -> Ray {
