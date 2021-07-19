@@ -35,7 +35,7 @@ impl Hittable for Sphere {
         let a: f64 = Vec3::squared_length(&r.direction());
         let half_b: f64 = r.direction() * oc;
         let c: f64 = Vec3::squared_length(&oc) - self.radius * self.radius;
-        let discriminant = half_b * half_b - a * c;
+        let discriminant = half_b.powi(2) - a * c;
         if discriminant > 0.0 {
             let root: f64 = discriminant.sqrt();
             let t = (-half_b - root) / a;

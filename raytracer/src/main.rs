@@ -11,7 +11,7 @@ pub use crate::material::*;
 use crate::rtweekend::random_double1;
 pub use crate::sphere::Sphere;
 use image::{ImageBuffer, RgbImage};
-use indicatif::ProgressBar;
+//use indicatif::ProgressBar;
 pub use ray::Ray;
 pub use rtweekend::clamp;
 use std::rc::Rc;
@@ -115,8 +115,8 @@ fn random_scene() -> HittableList {
 fn main() {
     let aspect_ratio = 3.0 / 2.0;
     let image_width: u32 = 1200;
-    let k = image_width as f64;
-    let image_height = k / aspect_ratio;
+    let _k = image_width as f64;
+    let image_height = _k / aspect_ratio;
     let image_height = image_height as u32;
     let samples_per_pixel: u32 = 50;
 
@@ -140,8 +140,8 @@ fn main() {
     );
 
     //render
-    let x = Vec3::new(1.0, 1.0, 1.0);
-    println!("{:?}", x);
+    /*let _x = Vec3::new(1.0, 1.0, 1.0);
+    println!("{:?}", _x);*/
     let mut img: RgbImage = ImageBuffer::new(image_width, image_height);
     //println!("P3\n{} {}\n255\n", image_width, image_height);
     for j in 0..image_height {
@@ -149,17 +149,17 @@ fn main() {
             let mut pixel_color = color::zero();
             let pixel = img.get_pixel_mut(i, j);
             for s in 0..samples_per_pixel {
-                let i: f64 = i as f64;
-                let j: f64 = (image_height - 1 - j) as f64;
-                let i: f64 = (i + random_double1()) as f64;
-                let j: f64 = (j + random_double1()) as f64;
-                let p: f64 = (image_width - 1) as f64;
-                let q: f64 = (image_height - 1) as f64;
-                let u: f64 = i / p;
-                let v: f64 = j / q;
+                let _i: f64 = i as f64;
+                let _j: f64 = (image_height - 1 - j) as f64;
+                let _i: f64 = (_i + random_double1()) as f64;
+                let _j: f64 = (_j + random_double1()) as f64;
+                let _p: f64 = (image_width - 1) as f64;
+                let _q: f64 = (image_height - 1) as f64;
+                let _u: f64 = _i / _p;
+                let _v: f64 = _j / _q;
                 //println!("{:?}", r);
-                let r: Ray = Camera::get_ray(&cam, u, v);
-                pixel_color += ray_color(r, &world, MAXDEPTH);
+                let _r: Ray = Camera::get_ray(&cam, _u, _v);
+                pixel_color += ray_color(_r, &world, MAXDEPTH);
             }
 
             write_color(pixel, &pixel_color, samples_per_pixel);

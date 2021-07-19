@@ -50,7 +50,7 @@ impl Vec3 {
             _ => panic!("(pos)index out of bound"),
         }
     }
-    pub fn unit(self: &Self) -> Self {
+    pub fn unit(&self) -> Self {
         //单位化
         let len = self.length();
         if len == 0.0 {
