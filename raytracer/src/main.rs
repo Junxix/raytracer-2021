@@ -43,7 +43,7 @@ fn ray_color(r: Ray, world: &HittableList, depth: i64) -> color {
     }
     let unit_direction = Vec3::unit(&r.direction());
     let t = (unit_direction.y + 1.0) * 0.5;
-    return color::new(1.0, 1.0, 1.0) * (1.0 - t) + color::new(0.5, 0.7, 1.0) * t;
+    color::new(1.0, 1.0, 1.0) * (1.0 - t) + color::new(0.5, 0.7, 1.0) * t
 }
 fn random_scene() -> HittableList {
     let mut world: HittableList = HittableList::new();

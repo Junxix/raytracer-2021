@@ -229,7 +229,7 @@ impl Mul for Vec3 {
     type Output = f64;
 
     fn mul(self, other: Self) -> f64 {
-        return self.x * other.x + self.y * other.y + self.z * other.z;
+        self.x * other.x + self.y * other.y + self.z * other.z
     }
 }
 
