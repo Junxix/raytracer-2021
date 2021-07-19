@@ -17,7 +17,11 @@ impl Vec3 {
         Self { x, y, z }
     }
     pub fn new0() -> Self {
-        Self { x:0.0, y:0.0, z:0.0 }
+        Self {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        }
     }
 
     pub fn ones() -> Self {

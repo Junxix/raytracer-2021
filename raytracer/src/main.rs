@@ -67,8 +67,6 @@ fn random_scene() -> HittableList {
             );
 
             if (center - point3::new(4.0, 0.2, 0.0)).length() > 0.9 {
-
-
                 if choose_mat < 0.8 {
                     let albedo = Vec3::elemul(color::random1(), color::random1());
                     let sphere_material = Arc::new(Lambertian::new(albedo));
