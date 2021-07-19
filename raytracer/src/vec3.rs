@@ -102,7 +102,7 @@ impl Vec3 {
 
     pub fn near_zero(&self) -> bool {
         let s = 1e-8;
-     (self.x < s) && (self.y < s) && (self.z < s)
+        (self.x < s) && (self.y < s) && (self.z < s)
     }
 
     /*pub fn refract(uv: Vec3, n: Vec3, etai_over_etat: f64) -> Vec3 {
@@ -259,7 +259,7 @@ impl Div<f64> for Vec3 {
     type Output = Self;
 
     fn div(self, other: f64) -> Self {
-    Self {
+        Self {
             x: self.x / other,
             y: self.y / other,
             z: self.z / other,

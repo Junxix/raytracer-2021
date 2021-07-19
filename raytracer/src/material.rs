@@ -84,7 +84,7 @@ pub struct Dielectric {
 }
 impl Dielectric {
     pub fn new(x: f64) -> Self {
-         Self { ir: x }
+        Self { ir: x }
     }
 
     pub fn reflectance(cosine: f64, ref_idx: f64) -> f64 {
