@@ -11,7 +11,7 @@ pub use crate::material::*;
 use crate::rtweekend::random_double1;
 pub use crate::sphere::Sphere;
 use image::{ImageBuffer, RgbImage};
-//use indicatif::ProgressBar;
+use indicatif::ProgressBar;
 pub use ray::Ray;
 pub use rtweekend::clamp;
 use std::rc::Rc;
@@ -199,5 +199,4 @@ fn write_color(pixel: &mut image::Rgb<u8>, pixel_color: &Vec3, samples_per_pixel
     let c: u8 = (256.0 * clamp(q, 0.0, 0.999)) as u8;
     *pixel = image::Rgb([a, b, c]);
     //println!("{} {} {}", a, b, c);
-    
 }
