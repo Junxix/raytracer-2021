@@ -184,19 +184,19 @@ fn main() {
     img.save("output/test.png").unwrap();
 }
 fn write_color(pixel: &mut image::Rgb<u8>, pixel_color: &Vec3, samples_per_pixel: u32) {
-    let mut r = pixel_color.x;
-    let mut g = pixel_color.y;
-    let mut q = pixel_color.z;
+    let mut _r = pixel_color.x;
+    let mut _g = pixel_color.y;
+    let mut _q = pixel_color.z;
 
     let samples_per_pixel = samples_per_pixel as f64;
     let scale = 1.0 / samples_per_pixel;
-    r = (r * scale).sqrt();
-    g = (g * scale).sqrt();
-    q = (q * scale).sqrt();
+    _r = (_r * scale).sqrt();
+    _g = (_g * scale).sqrt();
+    _q = (_q * scale).sqrt();
 
-    let a: u8 = (256.0 * clamp(r, 0.0, 0.999)) as u8;
-    let b: u8 = (256.0 * clamp(g, 0.0, 0.999)) as u8;
-    let c: u8 = (256.0 * clamp(q, 0.0, 0.999)) as u8;
-    *pixel = image::Rgb([a, b, c]);
+    let _a: u8 = (256.0 * clamp(_r, 0.0, 0.999)) as u8;
+    let _b: u8 = (256.0 * clamp(_g, 0.0, 0.999)) as u8;
+    let _c: u8 = (256.0 * clamp(_q, 0.0, 0.999)) as u8;
+    *pixel = image::Rgb([_a, _b, _c]);
     //println!("{} {} {}", a, b, c);
 }
