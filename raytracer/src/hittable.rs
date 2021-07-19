@@ -24,7 +24,7 @@ impl HitRecord {
             t: 0.0,
             front_face: false,
             mat_ptr: Arc::new(Metal::new1(color::new(0.0, 0.0, 0.0))),
-        };
+        }
     }
     pub fn new(mp: Arc<dyn Material>) -> Self {
         return Self {
