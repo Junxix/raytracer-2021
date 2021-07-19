@@ -116,8 +116,7 @@ impl Material for Dielectric {
         let cannot_refract = refraction_ratio * sin_theta > 1.0;
         let mut direction = Vec3::zero();
 
-        if cannot_refract
-            || Dielectric::reflectance(cos_theta, refraction_ratio) > random_double1()
+        if cannot_refract || Dielectric::reflectance(cos_theta, refraction_ratio) > random_double1()
         {
             direction = Vec3::reflect(unit_direction, rec.normal);
         } else {
