@@ -18,7 +18,7 @@ pub struct HitRecord {
 
 impl HitRecord {
     pub fn new0() -> Self {
-        return Self {
+        Self {
             p: Vec3::zero(),
             normal: Vec3::zero(),
             t: 0.0,
@@ -27,13 +27,13 @@ impl HitRecord {
         }
     }
     pub fn new(mp: Arc<dyn Material>) -> Self {
-        return Self {
+        Self {
             p: Vec3::zero(),
             normal: Vec3::zero(),
             t: 0.0,
             front_face: false,
             mat_ptr: mp,
-        };
+        }
     }
     pub fn set_face_normal(&mut self, r: &Ray, outward_normal: &Vec3) {
         self.front_face = (r.direction() * (*outward_normal)) < 0.0;
@@ -81,6 +81,6 @@ impl Hittable for HittableList {
                 *rec = temp_rec.clone();
             }
         }
-        return hit_anything;
+        hit_anything
     }
 }

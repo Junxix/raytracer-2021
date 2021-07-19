@@ -106,7 +106,7 @@ fn random_scene() -> HittableList {
         material3.clone(),
     )));
 
-    return world;
+    world
 }
 
 fn main() {
