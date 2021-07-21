@@ -24,7 +24,6 @@ use crate::hittable::HitRecord;
 use crate::hittable::Hittable;
 use crate::hittable::HittableList;
 pub const MAXDEPTH: i64 = 50;
-// sdfsdfs
 
 fn ray_color(r: Ray, world: &HittableList, depth: i64) -> color {
     let mut rec = HitRecord::new0();
