@@ -12,8 +12,6 @@ pub struct Camera {
     v: Vec3,
     w: Vec3,
     lens_radius: f64,
-    time0: f64,
-    time1: f64,
 }
 
 impl Camera {
@@ -25,8 +23,6 @@ impl Camera {
         aspect_ratio: f64,
         aperture: f64,
         focus_dist: f64,
-        _time0: f64,
-        _time1: f64,
     ) -> Self {
         let theta = degrees_to_radians(vfov);
         let h = (theta / 2.0).tan();
@@ -49,22 +45,6 @@ impl Camera {
             v: vv,
             w: ww,
             lens_radius: aperture / 2.0,
-            time0: _time0,
-            time1: _time1,
-        }
-    }
-    pub fn new2(&self, _time0: f64, _time1: f64) -> Self {
-        Self {
-            origin: self.origin.clone(),
-            horizontal: self.horizontal.clone(),
-            vertical: self.vertical.clone(),
-            lower_left_corner: self.lower_left_corner.clone(),
-            u: self.u.clone(),
-            v: self.v.clone(),
-            w: self.w.clone(),
-            lens_radius: self.lens_radius.clone(),
-            time0: _time0,
-            time1: _time1,
         }
     }
 
@@ -75,7 +55,6 @@ impl Camera {
         Ray::new(
             self.origin + offset,
             self.lower_left_corner + self.horizontal * s + self.vertical * t - self.origin - offset,
-            random_double2(self.time0, self.time1),
         )
     }
 }

@@ -141,6 +141,7 @@ fn simple_light() -> HittableList {
 
     let difflight = Arc::new(DiffuseLight::new_by_color(color::new(4.0, 4.0, 4.0)));
     objects.add(Arc::new(XyRect::new(3.0, 5.0, 1.0, 3.0, -2.0, difflight)));
+    objects.add(Arc::new(Sphere::new(3.0, 5.0, 1.0, 3.0, -2.0, difflight)));
 
     objects
 }

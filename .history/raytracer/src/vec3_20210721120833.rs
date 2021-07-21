@@ -118,13 +118,6 @@ impl Vec3 {
             y
         }
     }
-    pub fn fmax(x: f64, y: f64) -> f64 {
-        if x < y {
-            y
-        } else {
-            x
-        }
-    }
     pub fn refract(uv: Vec3, n: Vec3, etai_over_etat: f64) -> Vec3 {
         let cos_theta: f64 = Vec3::fmin(-uv * n, 1.0);
         let r_out_perp: Vec3 = (uv + n * cos_theta) * etai_over_etat;
@@ -140,14 +133,6 @@ impl Vec3 {
             }
             return p;
         }
-    }
-
-    pub fn random_int(min: i64, max: i64) -> i64 {
-        let _min = min as f64;
-        let _max = max as f64;
-        let _x = random_double2(_min, _max);
-        let _y = _x as i64;
-        _y
     }
 }
 

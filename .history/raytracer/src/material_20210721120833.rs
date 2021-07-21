@@ -1,10 +1,8 @@
 pub use crate::hittable::*;
 pub use crate::rtweekend::*;
-pub use crate::texture::*;
 pub use crate::vec3::*;
 use crate::Ray;
 //use std::rc::Rc;
-use std::sync::Arc;
 pub use Vec3 as point3;
 pub use Vec3 as color;
 
@@ -16,23 +14,14 @@ pub trait Material {
         attenuation: &mut Vec3,
         scattered: &mut Ray,
     ) -> bool;
-
-    fn emitted(&self, u: f64, v: f64, p: &point3) -> color {
-        color::new0()
-    }
 }
 
 pub struct Lambertian {
-    pub albedo: Arc<dyn Texture>,
+    pub albedo: color,
 }
 impl Lambertian {
-    pub fn new(a: Arc<dyn Texture>) -> Self {
+    pub fn new(a: color) -> Self {
         Self { albedo: a }
-    }
-    pub fn new_by_color(a: Vec3) -> Self {
-        Self {
-            albedo: Arc::new(Solid_color::new(a)),
-        }
     }
 }
 
@@ -48,8 +37,8 @@ impl Material for Lambertian {
         if scatter_direction.near_zero() {
             scatter_direction = rec.normal;
         }
-        *scattered = Ray::new(rec.p, scatter_direction, _ray_in.time());
-        *attenuation = self.albedo.value(rec.u, rec.v, &rec.p);
+        *scattered = Ray::new(rec.p, scatter_direction);
+        *attenuation = self.albedo;
         true
     }
 }
@@ -84,11 +73,7 @@ impl Material for Metal {
         scattered: &mut Ray,
     ) -> bool {
         let reflected = Vec3::reflect(ray_in.direction().unit(), rec.normal);
-        *scattered = Ray::new(
-            rec.p,
-            reflected + Vec3::random_in_unit_sphere() * self.fuss,
-            ray_in.time(),
-        );
+        *scattered = Ray::new(rec.p, reflected + Vec3::random_in_unit_sphere() * self.fuss);
         *attenuation = self.albedo;
         scattered.direction() * rec.normal > 0.0
     }
@@ -138,36 +123,7 @@ impl Material for Dielectric {
             direction = Vec3::refract(unit_direction, rec.normal, refraction_ratio);
         }
 
-        *scattered = Ray::new(rec.p, direction, ray_in.time());
+        *scattered = Ray::new(rec.p, direction);
         true
-    }
-}
-
-pub struct DiffuseLight {
-    emit: Arc<dyn Texture>,
-}
-impl DiffuseLight {
-    pub fn new(a: Arc<dyn Texture>) -> Self {
-        Self { emit: a }
-    }
-    pub fn new_by_color(c: color) -> Self {
-        Self {
-            emit: Arc::new(Solid_color::new(c)),
-        }
-    }
-}
-impl Material for DiffuseLight {
-    fn scatter(
-        &self,
-        ray_in: Ray,
-        rec: &HitRecord,
-        attenuation: &mut point3,
-        scattered: &mut Ray,
-    ) -> bool {
-        false
-    }
-
-    fn emitted(&self, u: f64, v: f64, p: &point3) -> color {
-        self.emit.value(u, v, p)
     }
 }

@@ -1,4 +1,3 @@
-pub use crate::aabb::*;
 pub use crate::hittable::*;
 pub use crate::material::*;
 pub use crate::vec3::Vec3;
@@ -29,14 +28,6 @@ impl Sphere {
     pub fn radius(&self) -> f64 {
         self.radius
     }
-
-    pub fn get_sphere_uv(p: &point3, u: &mut f64, v: &mut f64) {
-        let theta = p.y.acos();
-        let phi = p.z.atan2(p.x) + PI;
-
-        *u = phi / (2. * PI);
-        *v = theta / PI;
-    }
 }
 impl Hittable for Sphere {
     fn hit(&self, r: Ray, t_min: f64, t_max: f64, rec: &mut HitRecord) -> bool {
@@ -53,7 +44,6 @@ impl Hittable for Sphere {
                 rec.p = Ray::at(&r, t);
                 let outward_normal: Vec3 = (rec.p - self.center()) / self.radius();
                 rec.set_face_normal(&r, &outward_normal);
-                Sphere::get_sphere_uv(&outward_normal, &mut rec.u, &mut rec.v);
                 rec.mat_ptr = self.mat_ptr.clone();
                 return true;
             }
@@ -63,19 +53,10 @@ impl Hittable for Sphere {
                 rec.p = Ray::at(&r, t);
                 let outward_normal: Vec3 = (rec.p - self.center()) / self.radius();
                 rec.set_face_normal(&r, &outward_normal);
-                Sphere::get_sphere_uv(&outward_normal, &mut rec.u, &mut rec.v);
                 rec.mat_ptr = self.mat_ptr.clone();
                 return true;
             }
         }
         false
-    }
-
-    fn bounding_box(&self, time0: f64, time1: f64, output_box: &mut AABB) -> bool {
-        *output_box = AABB::new(
-            self.center - Vec3::new(self.radius, self.radius, self.radius),
-            self.center + Vec3::new(self.radius, self.radius, self.radius),
-        );
-        true
     }
 }
