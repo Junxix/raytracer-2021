@@ -1,10 +1,10 @@
 use crate::aabb::*;
 use crate::hittable::*;
 use crate::material::*;
-use crate::vec3::*;
 use crate::ray::*;
 use crate::rtweekend::*;
 use crate::texture::*;
+use crate::vec3::*;
 use std::sync::Arc;
 
 pub struct ConstantMedium {
@@ -63,8 +63,8 @@ impl Hittable for ConstantMedium {
 
         rec.t = rec1.t + hit_distance / ray_length;
         rec.p = r.at(rec.t);
-        rec.normal = Vec3::new(1.0, 0.0, 0.0); 
-        rec.front_face = true; 
+        rec.normal = Vec3::new(1.0, 0.0, 0.0);
+        rec.front_face = true;
         rec.mat_ptr = self.phase_function.clone();
         true
     }
