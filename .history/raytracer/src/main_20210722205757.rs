@@ -1,6 +1,6 @@
 mod aabb;
 mod aarect;
-mod bbbox;
+mod box;
 mod bvh;
 mod camera;
 mod constant_medium;
@@ -14,7 +14,7 @@ mod sphere;
 mod texture;
 #[allow(clippy::float_cmp)]
 mod vec3;
-pub use crate::bbbox::*;
+pub use crate::box::*;
 pub use crate::bvh::*;
 use crate::camera::Camera;
 pub use crate::constant_medium::*;
@@ -137,7 +137,7 @@ fn cornell_smoke() -> HittableList {
         white.clone(),
     )));
 
-    let box1 = Arc::new(Box6::new(
+    let box1 = Arc::new(box::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 330.0, 165.0),
         white.clone(),
@@ -150,7 +150,7 @@ fn cornell_smoke() -> HittableList {
         color::new(0.0, 0.0, 0.0),
     )));
 
-    let box2 = Arc::new(Box6::new(
+    let box2 = Arc::new(box::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 165.0, 165.0),
         white,
@@ -305,7 +305,7 @@ fn cornell_box() -> HittableList {
         555.,
         white.clone(),
     )));
-    let box1 = Arc::new(Box6::new(
+    let box1 = Arc::new(box::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 330.0, 165.0),
         white.clone(),
@@ -314,7 +314,7 @@ fn cornell_box() -> HittableList {
     let box1 = Arc::new(Translate::new(box1, &Vec3::new(265.0, 0.0, 295.0)));
     objects.add(box1);
 
-    let box2 = Arc::new(Box6::new(
+    let box2 = Arc::new(box::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 165.0, 165.0),
         white,
@@ -437,7 +437,7 @@ fn final_scene() -> HittableList {
             let y1 = random_double2(1.0, 101.0);
             let z1 = z0 + w;
 
-            boxes1.add(Arc::new(Box6::new(
+            boxes1.add(Arc::new(box::new(
                 &point3::new(x0, y0, z0),
                 &point3::new(x1, y1, z1),
                 ground.clone(),
@@ -626,7 +626,7 @@ fn main() {
         _ => {
             world = final_scene();
             aspect_ratio = 1.0;
-            samples_per_pixel = 10000;
+            samples_per_pixel = 100;
             background = color::new(0.0, 0.0, 0.0);
             lookfrom = point3::new(478.0, 278.0, -600.0);
             lookat = point3::new(278., 278., 0.);

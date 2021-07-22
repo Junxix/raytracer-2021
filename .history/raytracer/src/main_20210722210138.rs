@@ -626,7 +626,7 @@ fn main() {
         _ => {
             world = final_scene();
             aspect_ratio = 1.0;
-            samples_per_pixel = 10000;
+            samples_per_pixel = 100;
             background = color::new(0.0, 0.0, 0.0);
             lookfrom = point3::new(478.0, 278.0, -600.0);
             lookat = point3::new(278., 278., 0.);

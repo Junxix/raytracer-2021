@@ -1,10 +1,10 @@
 use crate::aabb::*;
 use crate::hittable::*;
 use crate::material::*;
-use crate::vec3::*;
 use crate::ray::*;
 use crate::rtweekend::*;
 use crate::texture::*;
+use crate::vec3::*;
 use std::sync::Arc;
 
 pub struct ConstantMedium {
@@ -32,6 +32,7 @@ impl ConstantMedium {
 
 impl Hittable for ConstantMedium {
     fn hit(&self, r: Ray, t_min: f64, t_max: f64, rec: &mut HitRecord) -> bool {
+
         let mut rec1 = HitRecord::new(Arc::new(Lambertian::new_by_color(color::new(
             0.0, 0.0, 0.0,
         ))));

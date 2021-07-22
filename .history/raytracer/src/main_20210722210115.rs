@@ -1,6 +1,6 @@
 mod aabb;
 mod aarect;
-mod bbbox;
+mod box6;
 mod bvh;
 mod camera;
 mod constant_medium;
@@ -14,7 +14,7 @@ mod sphere;
 mod texture;
 #[allow(clippy::float_cmp)]
 mod vec3;
-pub use crate::bbbox::*;
+pub use crate::box6::*;
 pub use crate::bvh::*;
 use crate::camera::Camera;
 pub use crate::constant_medium::*;
@@ -626,7 +626,7 @@ fn main() {
         _ => {
             world = final_scene();
             aspect_ratio = 1.0;
-            samples_per_pixel = 10000;
+            samples_per_pixel = 100;
             background = color::new(0.0, 0.0, 0.0);
             lookfrom = point3::new(478.0, 278.0, -600.0);
             lookat = point3::new(278., 278., 0.);

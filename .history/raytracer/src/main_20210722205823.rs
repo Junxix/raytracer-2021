@@ -137,28 +137,28 @@ fn cornell_smoke() -> HittableList {
         white.clone(),
     )));
 
-    let box1 = Arc::new(Box6::new(
+    let bbbox1 = Arc::new(bbbox::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 330.0, 165.0),
         white.clone(),
     ));
-    let box1 = Arc::new(RotateY::new(box1, 15.0));
-    let box1 = Arc::new(Translate::new(box1, &Vec3::new(265.0, 0.0, 295.0)));
+    let bbbox1 = Arc::new(RotateY::new(bbbox1, 15.0));
+    let bbbox1 = Arc::new(Translate::new(bbbox1, &Vec3::new(265.0, 0.0, 295.0)));
     world.add(Arc::new(ConstantMedium::new_by_color(
-        box1,
+        bbbox1,
         0.01,
         color::new(0.0, 0.0, 0.0),
     )));
 
-    let box2 = Arc::new(Box6::new(
+    let bbbox2 = Arc::new(bbbox::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 165.0, 165.0),
         white,
     ));
-    let box2 = Arc::new(RotateY::new(box2, -18.0));
-    let box2 = Arc::new(Translate::new(box2, &Vec3::new(130.0, 0.0, 65.0)));
+    let bbbox2 = Arc::new(RotateY::new(bbbox2, -18.0));
+    let bbbox2 = Arc::new(Translate::new(bbbox2, &Vec3::new(130.0, 0.0, 65.0)));
     world.add(Arc::new(ConstantMedium::new_by_color(
-        box2,
+        bbbox2,
         0.01,
         color::new(1.0, 1.0, 1.0),
     )));
@@ -236,7 +236,7 @@ fn two_spheres() -> HittableList {
     objects
 }
 /*
-fn cornell_box() -> HittableList {
+fn cornell_bbbox() -> HittableList {
     let mut objects = HittableList::new();
 
     let red = Arc::new(Lambertian::new_by_color(color::new(0.65, 0.05, 0.05)));
@@ -277,7 +277,7 @@ fn cornell_box() -> HittableList {
     objects
 }
 */
-fn cornell_box() -> HittableList {
+fn cornell_bbbox() -> HittableList {
     let mut objects = HittableList::new();
 
     let red = Arc::new(Lambertian::new_by_color(color::new(0.65, 0.05, 0.05)));
@@ -305,24 +305,24 @@ fn cornell_box() -> HittableList {
         555.,
         white.clone(),
     )));
-    let box1 = Arc::new(Box6::new(
+    let bbbox1 = Arc::new(bbbox::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 330.0, 165.0),
         white.clone(),
     ));
-    let box1 = Arc::new(RotateY::new(box1, 15.0));
-    let box1 = Arc::new(Translate::new(box1, &Vec3::new(265.0, 0.0, 295.0)));
-    objects.add(box1);
+    let bbbox1 = Arc::new(RotateY::new(bbbox1, 15.0));
+    let bbbox1 = Arc::new(Translate::new(bbbox1, &Vec3::new(265.0, 0.0, 295.0)));
+    objects.add(bbbox1);
 
-    let box2 = Arc::new(Box6::new(
+    let bbbox2 = Arc::new(bbbox::new(
         &point3::new(0.0, 0.0, 0.0),
         &point3::new(165.0, 165.0, 165.0),
         white,
     ));
-    let box2 = Arc::new(RotateY::new(box2, -18.0));
-    let box2 = Arc::new(Translate::new(box2, &Vec3::new(130.0, 0.0, 65.0)));
+    let bbbox2 = Arc::new(RotateY::new(bbbox2, -18.0));
+    let bbbox2 = Arc::new(Translate::new(bbbox2, &Vec3::new(130.0, 0.0, 65.0)));
 
-    objects.add(box2);
+    objects.add(bbbox2);
 
     objects
 }
@@ -423,12 +423,12 @@ fn random_scene() -> HittableList {
     world
 }
 fn final_scene() -> HittableList {
-    let mut boxes1 = HittableList::new();
+    let mut bbboxes1 = HittableList::new();
     let ground = Arc::new(Lambertian::new_by_color(color::new(0.48, 0.83, 0.53)));
 
-    let boxes_per_side = 20;
-    for i in 0..boxes_per_side {
-        for j in 0..boxes_per_side {
+    let bbboxes_per_side = 20;
+    for i in 0..bbboxes_per_side {
+        for j in 0..bbboxes_per_side {
             let w = 100.0;
             let x0 = -1000.0 + i as f64 * w;
             let z0 = -1000.0 + j as f64 * w;
@@ -437,7 +437,7 @@ fn final_scene() -> HittableList {
             let y1 = random_double2(1.0, 101.0);
             let z1 = z0 + w;
 
-            boxes1.add(Arc::new(Box6::new(
+            bbboxes1.add(Arc::new(bbbox::new(
                 &point3::new(x0, y0, z0),
                 &point3::new(x1, y1, z1),
                 ground.clone(),
@@ -447,7 +447,7 @@ fn final_scene() -> HittableList {
 
     let mut world = HittableList::new();
 
-    world.add(Arc::new(BvhNode::from(&mut boxes1, 0.0, 1.0)));
+    world.add(Arc::new(BvhNode::from(&mut bbboxes1, 0.0, 1.0)));
 
     let light = Arc::new(DiffuseLight::new_by_color(color::new(7.0, 7.0, 7.0)));
     world.add(Arc::new(XzRect::new(
@@ -514,11 +514,11 @@ fn final_scene() -> HittableList {
         Arc::new(Lambertian { albedo: pertext }),
     )));
 
-    let mut boxes2 = HittableList::new();
+    let mut bbboxes2 = HittableList::new();
     let white = Arc::new(Lambertian::new_by_color(color::new(0.73, 0.73, 0.73)));
     let ns = 1000;
     for _j in 0..ns {
-        boxes2.add(Arc::new(Sphere::new(
+        bbboxes2.add(Arc::new(Sphere::new(
             point3::random2(0.0, 165.0),
             10.0,
             white.clone(),
@@ -527,7 +527,7 @@ fn final_scene() -> HittableList {
 
     world.add(Arc::new(Translate::new(
         Arc::new(RotateY::new(
-            Arc::new(BvhNode::from(&mut boxes2, 0.0, 1.0)),
+            Arc::new(BvhNode::from(&mut bbboxes2, 0.0, 1.0)),
             15.0,
         )),
         &Vec3::new(-100.0, 270.0, 395.0),
@@ -596,7 +596,7 @@ fn main() {
             background = color::new(0.0, 0.0, 0.0);
         }
         6 => {
-            world = cornell_box();
+            world = cornell_bbbox();
             aspect_ratio = 1.0;
             image_width = 600;
             samples_per_pixel = 200;
@@ -626,7 +626,7 @@ fn main() {
         _ => {
             world = final_scene();
             aspect_ratio = 1.0;
-            samples_per_pixel = 10000;
+            samples_per_pixel = 100;
             background = color::new(0.0, 0.0, 0.0);
             lookfrom = point3::new(478.0, 278.0, -600.0);
             lookat = point3::new(278., 278., 0.);
